@@ -1,5 +1,6 @@
 # ClientFlowTs
 
+Angular application using typescript
 
 ## Development server
 

@@ -1,7 +1,4 @@
-<style>
-  
-</style>
-<div class="flex flex-col items-center gap-4" >
+<div class="flex flex-col items-center gap-4" *ngIf="!isLoggedIn()">
 <div class="flex justify-center mt-4">
   <h1 class="text-3xl font-bold text-emerald-800">Client Flow Application</h1>
 </div>
@@ -14,7 +11,8 @@
     </div>
   </nav>
 </div>
-<div class="mt-[10px]">
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
 </div>
+<div class="container mx-auto pt-[35px]">
+  <router-outlet></router-outlet>
 </div>

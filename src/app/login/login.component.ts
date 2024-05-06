@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 
 export class LoginComponent implements OnInit{
@@ -30,8 +31,14 @@ export class LoginComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
     ) {
+  }
+
+  isLoggedIn() {
+    console.log(this.authService.isLoggedIn())
+    return this.authService.isLoggedIn();
   }
 
   ngOnInit(): void {
@@ -55,11 +62,24 @@ export class LoginComponent implements OnInit{
     this.authService.login(this.loginForm.value)
     .subscribe(
       (response: any) => {
-        // Save token to local storage
-        this.authService.saveToken(response.access_token);
-
-        // Redirect the user to the dashboard page
-        this.router.navigate(['/dashboard']);
+        if (response.access_token) {
+            this.authService.saveToken(response.access_token);
+            this.router.navigate(['/dashboard']);
+            this._snackBar.open('Login successful!', 'Close', {
+              duration: 5000,
+              verticalPosition: 'top',
+              horizontalPosition: 'end',
+              panelClass: ['snackbar-success']
+            });
+          } else {
+            this._snackBar.open(response.message || 'Unknown error occurred', 'Close', {
+              duration: 5000,
+              verticalPosition: 'top',
+              horizontalPosition: 'end',
+              panelClass: ['snackbar-danger']
+            });
+            this.loading = false;
+          }
       },
       (error: HttpErrorResponse) => {
         console.log(error);

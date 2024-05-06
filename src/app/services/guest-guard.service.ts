@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GuestGuardService {
 
-  constructor(
-    private router: Router
-    ) 
-  { }
+export class GuestGuardService implements CanActivate {
 
-  canActivate(
+  constructor(private router: Router, private authService: AuthService) {}
 
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-    ) {
-    if (
-      typeof localStorage !== 'undefined' && !localStorage.getItem('access_token')
-      ) { return true; }
-      this.router.navigateByUrl('/');
+  canActivate(): boolean {
+    if (!this.authService.isLoggedIn()) {
+      return true;
+    } else {
+      this.router.navigate(['/dashboard']); // Redirect to the main page for authenticated users
       return false;
+    }
   }
 }

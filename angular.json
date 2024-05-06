@@ -99,6 +99,10 @@
               "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.scss"
             ],
+            "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/styles.css"
+            ],
             "scripts": []
           }
         }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Httpclient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,28 @@ import { Httpclient, HttpHeaders } from '@angular/common/http';
 export class AuthService {
 
   // varriables
-  authUrl = 'http://local'
+  private BASE_URL = 'http://localhost';
+  private tokenKey = 'auth_token';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  login(credentials: { email: string, password: string}): Observable<any> {
+    return this.http.post<any>(`${this.BASE_URL}/api/login`, credentials);
+  }
+
+  saveToken(token: string) {
+    localStorage.setItem(this.tokenKey, token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+
+  logout(){
+    localStorage.removeItem(this.tokenKey);
+  }
 }

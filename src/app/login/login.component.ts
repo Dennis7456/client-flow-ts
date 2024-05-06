@@ -20,7 +20,8 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   loading = false;
-  submitted = false; 
+  submitted = false;
+  error = '';
 
   getFormControl(name: string): FormControl {
     return this.loginForm.get(name) as FormControl;
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router) {
+    private router: Router
+    ) {
   }
 
   ngOnInit(): void {
@@ -61,7 +63,7 @@ export class LoginComponent implements OnInit{
       },
       (error: HttpErrorResponse) => {
         console.log(error);
-
+        this.error = error.message;
         this.loading = false;
       });
   }

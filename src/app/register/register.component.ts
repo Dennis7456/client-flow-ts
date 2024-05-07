@@ -34,18 +34,18 @@ export class RegisterComponent implements OnInit {
   }
 
     isLoggedIn() {
-    console.log(this.authService.isLoggedIn())
+    // console.log(this.authService.isLoggedIn())
     return this.authService.isLoggedIn();
   }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      userName: ['', [Validators.required]],
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      user_name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      password_confirmation: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
   }
 
@@ -76,6 +76,8 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    console.log(this.registerForm.value)
+    
     this.loading = true;
     this.authService.register(this.registerForm.value)
     .subscribe(

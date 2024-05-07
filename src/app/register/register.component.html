@@ -2,26 +2,26 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-[30px] justify-center items-start text-md">
 
   <div>
-    <input matInput type="text" name="firstName" [formControl]="getFormControl('firstName')" placeholder="First name" class="custom-indent py-[10px] px-[18px] bg-gray-200 focus:outline-none focus:outline-gray-500 focus:border-gray-500 truncate...">
+    <input matInput type="text" name="first_name" [formControl]="getFormControl('first_name')" placeholder="First name" class="custom-indent py-[10px] px-[18px] bg-gray-200 focus:outline-none focus:outline-gray-500 focus:border-gray-500 truncate...">
 
-    <div *ngIf="f['firstName'].invalid && (f['firstName'].dirty || f['firstName'].touched)" class="text-red-500">
-      <div *ngIf="f['firstName'].errors?.['required']">First name is required.</div>
+    <div *ngIf="f['first_name'].invalid && (f['first_name'].dirty || f['first_name'].touched)" class="text-red-500">
+      <div *ngIf="f['first_name'].errors?.['required']">First name is required.</div>
     </div>
   </div>
 
   <div>
-    <input matInput type="text" name="lastName" [formControl]="getFormControl('lastName')" placeholder="Last name" class="custom-indent py-[10px] px-[18px] bg-gray-200 focus:outline-none focus:outline-gray-500 focus:border-gray-500 truncate...">
+    <input matInput type="text" name="last_name" [formControl]="getFormControl('last_name')" placeholder="Last name" class="custom-indent py-[10px] px-[18px] bg-gray-200 focus:outline-none focus:outline-gray-500 focus:border-gray-500 truncate...">
 
-    <div *ngIf="f['lastName'].invalid && (f['lastName'].dirty || f['lastName'].touched)" class="text-red-500">
-      <div *ngIf="f['lastName'].errors?.['required']">Last name is required.</div>
+    <div *ngIf="f['last_name'].invalid && (f['last_name'].dirty || f['last_name'].touched)" class="text-red-500">
+      <div *ngIf="f['last_name'].errors?.['required']">Last name is required.</div>
     </div>
   </div>
 
   <div>
-    <input matInput type="text" name="userName" [formControl]="getFormControl('userName')" placeholder="User name" class="custom-indent py-[10px] px-[18px] bg-gray-200 focus:outline-none focus:outline-gray-500 focus:border-gray-500 truncate...">
+    <input matInput type="text" name="user_name" [formControl]="getFormControl('user_name')" placeholder="User name" class="custom-indent py-[10px] px-[18px] bg-gray-200 focus:outline-none focus:outline-gray-500 focus:border-gray-500 truncate...">
 
-    <div *ngIf="f['userName'].invalid && (f['userName'].dirty || f['userName'].touched)" class="text-red-500">
-      <div *ngIf="f['userName'].errors?.['required']">User name is required.</div>
+    <div *ngIf="f['user_name'].invalid && (f['user_name'].dirty || f['user_name'].touched)" class="text-red-500">
+      <div *ngIf="f['user_name'].errors?.['required']">User name is required.</div>
     </div>
   </div>
 
@@ -43,8 +43,8 @@
   </div>
 
   <div>
-    <input matInput type="password" name="confirmPassword" [formControl]="getFormControl('confirmPassword')" placeholder="confirm password" class="py-[10px] px-[18px] bg-gray-200 focus:outline-none focus:outline-gray-500 focus:border-gray-500 truncate...">
-    <div *ngIf="f['confirmPassword'].errors?.['passwordMismatch']" class="text-red-500">Passwords do not match.</div>
+    <input matInput type="password" name="confirm_password" [formControl]="getFormControl('confirm_password')" placeholder="confirm password" class="py-[10px] px-[18px] bg-gray-200 focus:outline-none focus:outline-gray-500 focus:border-gray-500 truncate...">
+    <div *ngIf="f['password_confirmation'].errors?.['passwordMismatch']" class="text-red-500">Passwords do not match.</div>
   </div>
 
   <div *ngIf="error" class="text-red-500">{{ error }}</div>

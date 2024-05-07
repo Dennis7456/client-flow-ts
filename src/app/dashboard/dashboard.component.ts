@@ -1,10 +1,12 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { throwError, catchError } from 'rxjs';
+import { BASE_URL } from '../services/constants';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +26,7 @@ export class DashboardComponent implements OnInit {
     private http: HttpClient,
     private authService: AuthService,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
     ) { }
 
 
@@ -64,9 +66,27 @@ export class DashboardComponent implements OnInit {
     }
 
     this.loading = true;
-    console.log(this.contactForm.value);
-
-    this._snackBar.open('Form submitted successfully!', 'close', {
+    const token = this.authService.getToken();
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    console.log(headers);
+    this.http.post(`${BASE_URL}/api/contact-us`, this.contactForm.value, { headers })
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.error = 'Error occurred while submitting the form.';
+        this._snackBar.open('There was an error submitting you request.', 'close', {
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition: 'end',
+      panelClass: ['snackbar-danger']
+    });
+        return throwError(error);
+      }))
+    .subscribe(response => {
+      console.log(response)
+      this._snackBar.open('Form submitted successfully!', 'close', {
       duration: 5000,
       verticalPosition: 'top',
       horizontalPosition: 'end',
@@ -75,6 +95,8 @@ export class DashboardComponent implements OnInit {
 
     this.contactForm.reset();
     this.loading = false;
+    })
+    
   }
 
   getFormControl(controlName: string): FormControl {

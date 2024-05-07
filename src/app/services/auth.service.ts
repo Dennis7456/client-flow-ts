@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { BASE_URL, tokenKey } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +10,21 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   // varriables
-  private BASE_URL = 'http://localhost';
-  private tokenKey = 'auth_token';
+  // private BASE_URL = 'http://localhost';
+  // private tokenKey = 'auth_token';
 
   constructor(private http: HttpClient) { }
 
   login(credentials: { email: string, password: string}): Observable<any> {
-    return this.http.post<any>(`${this.BASE_URL}/api/login`, credentials);
+    return this.http.post<any>(`${BASE_URL}/api/login`, credentials);
   }
 
   saveToken(token: string) {
-    localStorage.setItem(this.tokenKey, token);
+    localStorage.setItem(tokenKey, token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return localStorage.getItem(tokenKey);
   }
 
   isLoggedIn(): boolean {
@@ -31,6 +32,6 @@ export class AuthService {
   }
 
   logout(){
-    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(tokenKey);
   }
 }

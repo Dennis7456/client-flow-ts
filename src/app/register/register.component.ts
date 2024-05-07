@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, Validators} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -29,11 +29,11 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private _snackBar: MatSnackBar
-    ) {
+  ) {
 
   }
 
-    isLoggedIn() {
+  isLoggedIn() {
     // console.log(this.authService.isLoggedIn())
     return this.authService.isLoggedIn();
   }
@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
 
   passwordMatchValidator(FormGroup: FormGroup) {
     const passwordControl = FormGroup.get('password');
-    const confirmPasswordControl = FormGroup.get('confirmPassword');
+    const confirmPasswordControl = FormGroup.get('password_confirmation');
 
     if (!passwordControl || !confirmPasswordControl) {
       return null;
@@ -72,40 +72,40 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
     // check for validation errors
-    if(this.registerForm.invalid){
+    if (this.registerForm.invalid) {
       return;
     }
 
-    console.log(this.registerForm.value)
-    
+    // console.log(this.registerForm.value)
+
     this.loading = true;
     this.authService.register(this.registerForm.value)
-    .subscribe(
-      (response: any) => {
-        if (response.access_token){
-          this.authService.saveToken(response.access_token);
-          this.router.navigate(['/dashboard']);
-          this._snackBar.open('Registered successfully', 'Close', {
-            duration: 5000,
-            verticalPosition: 'top',
-            horizontalPosition: 'end',
-            panelClass: ['snackbar-success']
-          });
-        } else {
-          this._snackBar.open(response.message || 'Unknown error occurred', 'Close', {
-            duration: 5000,
-            verticalPosition: 'top',
-            horizontalPosition: 'end',
-            panelClass: ['snackbar-danger']
-          });
-          this.loading = false;
-        }
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-        this.error = error.message;
-        this.loading = false
-      });
+      .subscribe(
+        (response: any) => {
+          if (response.access_token) {
+            this.authService.saveToken(response.access_token);
+            this.router.navigate(['/dashboard']);
+            this._snackBar.open('Registered successfully', 'Close', {
+              duration: 5000,
+              verticalPosition: 'top',
+              horizontalPosition: 'end',
+              panelClass: ['snackbar-success']
+            });
+          } else {
+            this._snackBar.open(response.message || 'Unknown error occurred', 'Close', {
+              duration: 5000,
+              verticalPosition: 'top',
+              horizontalPosition: 'end',
+              panelClass: ['snackbar-danger']
+            });
+            this.loading = false;
+          }
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          this.error = error.message;
+          this.loading = false
+        });
   }
 
 }

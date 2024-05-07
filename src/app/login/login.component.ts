@@ -1,5 +1,5 @@
-import { Component, OnInit} from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loading = false;
   submitted = false;
@@ -27,17 +27,17 @@ export class LoginComponent implements OnInit{
   getFormControl(name: string): FormControl {
     return this.loginForm.get(name) as FormControl;
   }
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
     private _snackBar: MatSnackBar
-    ) {
+  ) {
   }
 
   isLoggedIn() {
-    console.log(this.authService.isLoggedIn())
+    // console.log(this.authService.isLoggedIn())
     return this.authService.isLoggedIn();
   }
 
@@ -50,19 +50,19 @@ export class LoginComponent implements OnInit{
 
   get f() { return this.loginForm.controls; }
 
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
 
     //check for error
-    if(this.loginForm.invalid){
+    if (this.loginForm.invalid) {
       return;
     }
 
     this.loading = true;
     this.authService.login(this.loginForm.value)
-    .subscribe(
-      (response: any) => {
-        if (response.access_token) {
+      .subscribe(
+        (response: any) => {
+          if (response.access_token) {
             this.authService.saveToken(response.access_token);
             this.router.navigate(['/dashboard']);
             this._snackBar.open('Login successful!', 'Close', {
@@ -80,11 +80,11 @@ export class LoginComponent implements OnInit{
             });
             this.loading = false;
           }
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-        this.error = error.message;
-        this.loading = false;
-      });
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          this.error = error.message;
+          this.loading = false;
+        });
   }
 }

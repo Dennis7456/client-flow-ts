@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BASE_URL, tokenKey } from './constants';
-import 'localstorage-polyfill';
+// import 'localstorage-polyfill';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(credentials: { email: string, password: string}): Observable<any> {
+  login(credentials: { email: string, password: string }): Observable<any> {
     return this.http.post<any>(`${BASE_URL}/api/login`, credentials);
   }
 
-  register(credentials: { firstName: string, lastName: string, userName: string, email: string, password: string}): Observable<any> {
+  register(credentials: { firstName: string, lastName: string, userName: string, email: string, password: string }): Observable<any> {
     return this.http.post<any>(`${BASE_URL}/api/register`, credentials);
   }
 
@@ -36,7 +36,7 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem(tokenKey);
   }
 }

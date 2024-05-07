@@ -43,7 +43,7 @@
   </div>
 
   <div>
-    <input matInput type="password" name="confirm_password" [formControl]="getFormControl('confirm_password')" placeholder="confirm password" class="py-[10px] px-[18px] bg-gray-200 focus:outline-none focus:outline-gray-500 focus:border-gray-500 truncate...">
+    <input matInput type="password" name="password_confirmation" [formControl]="getFormControl('password_confirmation')" placeholder="confirm password" class="py-[10px] px-[18px] bg-gray-200 focus:outline-none focus:outline-gray-500 focus:border-gray-500 truncate...">
     <div *ngIf="f['password_confirmation'].errors?.['passwordMismatch']" class="text-red-500">Passwords do not match.</div>
   </div>
 

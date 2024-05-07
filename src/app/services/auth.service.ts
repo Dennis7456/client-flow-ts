@@ -29,7 +29,10 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem(tokenKey);
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem(tokenKey);
+    }
+    return null;
   }
 
   isLoggedIn(): boolean {

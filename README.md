@@ -1,6 +1,55 @@
-# ClientFlowTs
+# Client Flow Application
 
-Angular application using typescript
+This is a Full Stack Web application utilizing Angular with Typescript for the client side and Laravel and Eloquent for the server side. The client-side application uses Angular version 17 while the server side uses Laravel version 10.
+
+## 1. Angular Front End
+
+The front-end application implements various components such as:
+
+- **Login Component**
+- **Registration Component**
+- **Dashboard Component**
+
+### Services Implemented
+
+- **Auth Service:** 
+  - Provides functionalities like login, logout, register, and other minimal functionalities necessary to authenticate the user using a token generated from the server side and stored on the client's local storage.
+
+- **Auth-Guard Service:** 
+  - Implements functionality to protect routes such as the dashboard route which hosts our contact form. Users will not be able to access the dashboard route or submit a contact form if they are not logged in.
+
+- **Guest-Guard Service:** 
+  - Works contrary to the auth-guard service, preventing the login page from being unnecessarily displayed when a user is logged. It also prevents the registration page from being displayed likewise.
+
+## Setup
+
+The front-end application can be set up by following these steps:
+
+1. Clone the repository via:
+   ```bash
+   git clone [repo link]
+   ```
+
+2. Run npm install to install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run npm start to spin up a local development server on `http://localhost:4200/`:
+   ```bash
+   npm start
+   ```
+
+4. Run npm build to build the application:
+   ```bash
+   npm build
+   ```
+
+5. Ensure that the base URL is correctly set in the constants file located in the `src/app/service` folder to access backend services.
+
+Feel free to reach out if you encounter any issues or have any questions!
+
+# Other Commands:
 
 ## Development server
 

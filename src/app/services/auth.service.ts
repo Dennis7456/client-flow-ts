@@ -19,6 +19,10 @@ export class AuthService {
     return this.http.post<any>(`${BASE_URL}/api/login`, credentials);
   }
 
+  register(credentials: { firstName: string, lastName: string, userName: string, email: string, password: string}): Observable<any> {
+    return this.http.post<any>(`${BASE_URL}/api/register`, credentials);
+  }
+
   saveToken(token: string) {
     localStorage.setItem(tokenKey, token);
   }

@@ -66,14 +66,14 @@ export class LoginComponent implements OnInit{
             this.authService.saveToken(response.access_token);
             this.router.navigate(['/dashboard']);
             this._snackBar.open('Login successful!', 'Close', {
-              duration: 5000,
+              duration: 15000,
               verticalPosition: 'top',
               horizontalPosition: 'end',
               panelClass: ['snackbar-success']
             });
           } else {
             this._snackBar.open(response.message || 'Unknown error occurred', 'Close', {
-              duration: 5000,
+              duration: 15000,
               verticalPosition: 'top',
               horizontalPosition: 'end',
               panelClass: ['snackbar-danger']

@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
     if (this.authService.isLoggedIn()) {
       this.authService.logout();
       this._snackBar.open('Logged out successfully!', 'close', {
-      duration: 5000,
+      duration: 15000,
       verticalPosition: 'top',
       horizontalPosition: 'end',
       panelClass: ['snackbar-success']
@@ -71,13 +71,13 @@ export class DashboardComponent implements OnInit {
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
-    console.log(headers);
+    console.log(this.contactForm.value);
     this.http.post(`${BASE_URL}/api/contact-us`, this.contactForm.value, { headers })
     .pipe(
       catchError((error: HttpErrorResponse) => {
         this.error = 'Error occurred while submitting the form.';
         this._snackBar.open('There was an error submitting you request.', 'close', {
-      duration: 5000,
+      duration: 15000,
       verticalPosition: 'top',
       horizontalPosition: 'end',
       panelClass: ['snackbar-danger']
@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
     .subscribe(response => {
       console.log(response)
       this._snackBar.open('Form submitted successfully!', 'close', {
-      duration: 5000,
+      duration: 15000,
       verticalPosition: 'top',
       horizontalPosition: 'end',
       panelClass: ['snackbar-success']

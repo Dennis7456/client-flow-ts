@@ -1,0 +1,70 @@
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+/*Success*/
+
+::ng-deep .snackbar-success {
+	border-radius: 1px;
+	--mdc-snackbar-container-color: green;
+	--mdc-snackbar-supporting-text-color: white;
+	outline: none;
+}
+
+::ng-deep .snackbar-success button {
+	border: none;
+	background-color: white;
+/*	--mdc-snackbar-container-color: green;*/
+/*	--mat-mdc-snack-bar-button-color: white;*/
+color: white;
+	
+}
+
+/*Danger*/
+::ng-deep .snackbar-danger {
+	border-radius: 1px;
+	--mdc-snackbar-container-color: red;
+	--mdc-snackbar-supporting-text-color: white;
+	outline: none;
+}
+
+::ng-deep .snackbar-danger button {
+	border: none;
+	background-color: white;
+/*	--mdc-snackbar-container-color: green;*/
+/*	--mat-mdc-snack-bar-button-color: white;*/
+color: white;
+	
+}
+
+/*Warning*/
+::ng-deep .snackbar-warning {
+	border-radius: 1px;
+	--mdc-snackbar-container-color: yellow;
+	--mdc-snackbar-supporting-text-color: white;
+	outline: none;
+}
+
+::ng-deep .snackbar-warning button {
+	border: none;
+	background-color: white;
+/*	--mdc-snackbar-container-color: green;*/
+/*	--mat-mdc-snack-bar-button-color: white;*/
+color: white;
+	
+}
+
+/*Info*/
+::ng-deep .snackbar-info {
+	border-radius: 1px;
+	--mdc-snackbar-container-color: blue;
+	--mdc-snackbar-supporting-text-color: white;
+	outline: none;
+}
+
+::ng-deep .snackbar-info button {
+	border: none;
+	background-color: white;
+/*	--mdc-snackbar-container-color: green;*/
+/*	--mat-mdc-snack-bar-button-color: white;*/
+color: white;
+	
+}
